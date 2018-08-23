@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Pizza Ordering</string>
+    <string name="crust">Crust</string>
+    <string name="topping">Toppings</string>
+    <string name="location">To go or no?</string>
+    <string name="thin">Thin</string>
+    <string name="pan_tossed">Pan Tossed</string>
+    <string name="deep_dish">Deep Dish</string>
+    <string name="pepperoni">Pepperoni</string>
+    <string name="spinach">Spinach</string>
+    <string name="pineapple">Pineapple</string>
+    <string name="bacon">Bacon</string>
+    <string name="restaurant">Restaurant</string>
+    <string name="pickup">Pickup</string>
+    <string name="delivery">Delivery</string>
+    <string name="size">Size</string>
+</resources>
