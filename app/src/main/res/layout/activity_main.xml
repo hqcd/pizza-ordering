@@ -16,8 +16,162 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="330dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:baselineAligned="false"
             android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/crustTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/crust"
+                    android:textSize="24sp" />
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:id="@+id/ptRadioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pan_tossed" />
+
+                    <RadioButton
+                        android:id="@+id/thinRadioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/thin" />
+
+                    <RadioButton
+                        android:id="@+id/ddRadioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/deep_dish" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/toppingsTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/topping"
+                    android:textSize="24sp" />
+
+                <CheckBox
+                    android:id="@+id/pepCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pepperoni" />
+
+                <CheckBox
+                    android:id="@+id/pineappleCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pineapple" />
+
+                <CheckBox
+                    android:id="@+id/baconCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bacon" />
+
+                <CheckBox
+                    android:id="@+id/spinachCheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/spinach" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:baselineAligned="false">
+
+            <TextView
+                android:id="@+id/toGoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:text="@string/location"
+                android:textSize="24sp" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0">
+
+                <RadioButton
+                    android:id="@+id/restRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/restaurant" />
+
+                <RadioButton
+                    android:id="@+id/pickupRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pickup" />
+
+                <RadioButton
+                    android:id="@+id/deliveryRadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/delivery" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/sizeTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:gravity="center"
+                android:text="@string/size"
+                android:textSize="24sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <SeekBar
+                    android:id="@+id/sizeSeekBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight=".850" />
+
+                <TextView
+                    android:id="@+id/sizeTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".15"
+                    android:text="in"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+
 
         </LinearLayout>
 
