@@ -36,8 +36,11 @@
                     android:textSize="24sp" />
 
                 <RadioGroup
+                    android:id="@+id/crustRadioGroup"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:checkedButton="@+id/ptRadioButton">
+
 
                     <RadioButton
                         android:id="@+id/ptRadioButton"
@@ -118,9 +121,11 @@
                 android:textSize="24sp" />
 
             <RadioGroup
+                android:id="@+id/locationRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0">
+                android:layout_weight="0"
+                android:checkedButton="@id/restRadioButton">
 
                 <RadioButton
                     android:id="@+id/restRadioButton"
@@ -160,17 +165,25 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:layout_weight=".850" />
+                    android:layout_weight=".850"
+                    android:max="9"
+                    android:progress="5"
+                    android:theme="@style/Widget.AppCompat.SeekBar.Discrete"/>
 
                 <TextView
-                    android:id="@+id/sizeTextView"
+                    android:id="@+id/pizzaSizeTextView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".15"
-                    android:text="in"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:text="22\"/>
             </LinearLayout>
-
+        <TextView
+            android:id="@+id/priceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/totalprice"
+            />
 
 
         </LinearLayout>
