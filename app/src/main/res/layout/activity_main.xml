@@ -29,7 +29,7 @@
 
                 <TextView
                     android:id="@+id/crustTextView"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:text="@string/crust"
@@ -176,14 +176,18 @@
                     android:layout_height="wrap_content"
                     android:layout_weight=".15"
                     android:textSize="20sp"
-                    android:text="22\"/>
+                    android:text="@string/defaultsize"/>
             </LinearLayout>
-        <TextView
-            android:id="@+id/priceTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/totalprice"
-            />
+
+            <TextView
+                android:id="@+id/priceTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/totalprice"
+                android:textSize="24dp"
+                tools:paddingTop="5dp" />
 
 
         </LinearLayout>
