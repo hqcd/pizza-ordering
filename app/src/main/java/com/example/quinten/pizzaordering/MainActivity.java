@@ -18,8 +18,12 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
+
 public class MainActivity extends AppCompatActivity {
 
+
+    DecimalFormat df2 = new DecimalFormat("##.##");
     //Crust Radio Button Declarations
     RadioGroup crustRadioGroup;
     RadioButton ptRadioButton;
@@ -45,15 +49,29 @@ public class MainActivity extends AppCompatActivity {
     //Price integers
     TextView priceTextView;
     double crustPrice;
-    double toppingPrice;
+    int numToppings;
+    int pizzaSize = 22;
     double deliveryPrice;
-    double sizePrice;
     double totalPrice;
 
+    //Update Price Method
+    public void update(){
+        double sizeSquared = Math.PI * Math.pow((pizzaSize / 2), 2);
+        totalPrice = crustPrice + (numToppings * sizeSquared * .05) + deliveryPrice + (sizeSquared * .05);
+        priceTextView.setText("$" + String.valueOf(df2.format(totalPrice)));
+
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        init();
+        update();
+
+    }
+
+    public void init(){
 
         //Assigning views by ID for Crust Radio Group
         crustRadioGroup = (RadioGroup)findViewById(R.id.crustRadioGroup);
@@ -69,6 +87,10 @@ public class MainActivity extends AppCompatActivity {
 
         //Assign View by ID for location Radio Group
         locationRadioGroup = (RadioGroup)findViewById(R.id.locationRadioGroup);
+        restRadioButton = (RadioButton)findViewById(R.id.restRadioButton);
+        pickupRadioButton = (RadioButton)findViewById(R.id.pickupRadioButton);
+        deliveryRadioButton = (RadioButton)findViewById(R.id.deliveryRadioButton);
+
 
         //Assign view by ID seekbar
         sizeSeekBar = (SeekBar)findViewById(R.id.sizeSeekBar);
@@ -84,88 +106,142 @@ public class MainActivity extends AppCompatActivity {
                 int currentId = crustRadioGroup.getCheckedRadioButtonId();
                 RadioButton currentRb = (RadioButton)findViewById(currentId);
                 Toast.makeText(MainActivity.this, currentRb.getText().toString(), Toast.LENGTH_SHORT).show();
-                switch(){
-                    case ptRadioButton: crustPrice = 0; break;
-                    case thinRadioButton: crustPrice = 2.5; break;
-                    case ddRadioButton: crustPrice = 5; break;
+                switch(currentRb.getText().toString()){
+                    case "Pan Tossed": crustPrice = 0; break;
+                    case "Thin": crustPrice = 2.5; break;
+                    case "Deep Dish": crustPrice = 5; break;
                 }
                 update();
 
             }
         });
 
+        //Radio Group Listener
+        locationRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                int currentId = locationRadioGroup.getCheckedRadioButtonId();
+                RadioButton currentRb = (RadioButton)findViewById(currentId);
+                Toast.makeText(MainActivity.this, currentRb.getText().toString(), Toast.LENGTH_SHORT).show();
+                switch(currentRb.getText().toString()){
+                    case "Restaurant": deliveryPrice = 0; break;
+                    case "Pickup": deliveryPrice = 0; break;
+                    case "Delivery": deliveryPrice = 3; break;
+                }
+                update();
+
+            }
+        });
+
+
         //Check Box Listeners
-            //pepperoni
-                pepperoni.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if(isChecked){
-                            Toast.makeText(MainActivity.this, pepperoni.getText().toString() + " is added", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-                //pineapple
-                pineapple.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if(isChecked){
-                            Toast.makeText(MainActivity.this, pineapple.getText().toString() + " is added", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-                //spinach
-                spinach.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if(isChecked){
-                            Toast.makeText(MainActivity.this, spinach.getText().toString() + " is added", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-                //bacon
-                bacon.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if(isChecked){
-                            Toast.makeText(MainActivity.this, bacon.getText().toString() + " is added", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-
-                //Seekbar listener
-                sizeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-                    @Override
-                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                        switch(progress)
+        //pepperoni
+        pepperoni.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(isChecked)
                         {
-                            case 0: pizzaSizeTextView.setText("12\""); break;
-                            case 1: pizzaSizeTextView.setText("14\""); break;
-                            case 2: pizzaSizeTextView.setText("16\""); break;
-                            case 3: pizzaSizeTextView.setText("18\""); break;
-                            case 4: pizzaSizeTextView.setText("20\""); break;
-                            case 5: pizzaSizeTextView.setText("22\""); break;
-                            case 6: pizzaSizeTextView.setText("24\""); break;
-                            case 7: pizzaSizeTextView.setText("26\""); break;
-                            case 8: pizzaSizeTextView.setText("28\""); break;
-                            case 9: pizzaSizeTextView.setText("30\""); break;
+                            numToppings++;
+                            Toast.makeText(MainActivity.this,  pepperoni.getText().toString() + " Added", Toast.LENGTH_SHORT).show();
                         }
-                    }
 
-                    @Override
-                    public void onStartTrackingTouch(SeekBar seekBar) {
+                    else
+                        {
+                            numToppings--;
+                            Toast.makeText(MainActivity.this, pepperoni.getText().toString() + " Removed", Toast.LENGTH_SHORT).show();
+                        }
 
-                    }
+                update();
+            }
+        });
+        //pineapple
+        pineapple.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    numToppings++;
+                    Toast.makeText(MainActivity.this,  pineapple.getText().toString() + " Added", Toast.LENGTH_SHORT).show();
+                }
 
-                    @Override
-                    public void onStopTrackingTouch(SeekBar seekBar) {
+                else
+                {
+                    numToppings--;
+                    Toast.makeText(MainActivity.this, pineapple.getText().toString() + " Removed", Toast.LENGTH_SHORT).show();
+                }
 
-                    }
-                });
-    }
+                update();
+            }
+        });
+        //spinach
+        spinach.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    numToppings++;
+                    Toast.makeText(MainActivity.this,  spinach.getText().toString() + " Added", Toast.LENGTH_SHORT).show();
+                }
 
-    public void update(){
-        totalPrice = crustPrice + toppingPrice + deliveryPrice + sizePrice;
-        priceTextView.setText("$" + String.valueOf(totalPrice));
+                else
+                {
+                    numToppings--;
+                    Toast.makeText(MainActivity.this, spinach.getText().toString() + " Removed", Toast.LENGTH_SHORT).show();
+                }
 
+                update();
+            }
+        });
+        //bacon
+        bacon.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    numToppings++;
+                    Toast.makeText(MainActivity.this,  bacon.getText().toString() + " Added", Toast.LENGTH_SHORT).show();
+                }
+
+                else
+                {
+                    numToppings--;
+                    Toast.makeText(MainActivity.this, bacon.getText().toString() + " Removed", Toast.LENGTH_SHORT).show();
+                }
+
+                update();
+            }
+        });
+
+        //Seekbar listener
+        sizeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                switch(progress)
+                {
+                    case 0: pizzaSizeTextView.setText("12\""); pizzaSize = 12; break;
+                    case 1: pizzaSizeTextView.setText("14\""); pizzaSize = 14; break;
+                    case 2: pizzaSizeTextView.setText("16\""); pizzaSize = 16; break;
+                    case 3: pizzaSizeTextView.setText("18\""); pizzaSize = 18; break;
+                    case 4: pizzaSizeTextView.setText("20\""); pizzaSize = 20; break;
+                    case 5: pizzaSizeTextView.setText("22\""); pizzaSize = 22; break;
+                    case 6: pizzaSizeTextView.setText("24\""); pizzaSize = 24; break;
+                    case 7: pizzaSizeTextView.setText("26\""); pizzaSize = 26; break;
+                    case 8: pizzaSizeTextView.setText("28\""); pizzaSize = 28; break;
+                    case 9: pizzaSizeTextView.setText("30\""); pizzaSize = 30; break;
+                }
+
+                update();
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 }
